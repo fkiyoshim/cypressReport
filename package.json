@@ -1,0 +1,22 @@
+{
+  "name": "cypresscucumber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run --browser chrome --headed --e2e --spec cypress/e2e/googleSearch.feature"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^20.0.0",
+    "cypress": "^14.4.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "cypress-mochawesome-reporter": "^3.8.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinition": true,
+    "step_definitions": "cypress/e2e/googleSearch"
+  }
+}
