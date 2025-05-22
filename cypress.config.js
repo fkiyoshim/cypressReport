@@ -1,22 +1,26 @@
-const cucumber = require('cypress-cucumber-preprocessor').default;
 const { defineConfig } = require("cypress");
-const preprocessor = require('@badeball/cypress-cucumber-preprocessor');
-const browserify = require('@badeball/cypress-cucumber-preprocessor/browserify');
+const { addCucumberPreprocessorPlugin } = require("@badeball/cypress-cucumber-preprocessor");
+const browserify = require("@badeball/cypress-cucumber-preprocessor/browserify");
+const mochawesome = require("cypress-mochawesome-reporter/plugin");
 
 async function setupNodeEvents(on, config) {
-  await preprocessor.addCucumberPreprocessorPlugin(on, config);
-  on('file:preprocessor', browserify.default(config));
-  on('file:preprocessor', cucumber());
-  require('cypress-mochawesome-reporter/plugin')(on);
+  await addCucumberPreprocessorPlugin(on, config, {
+    stepDefinitions: "cypress/support/step_definitions"
+  });
+
+  on("file:preprocessor", browserify.default(config));
+
+  mochawesome(on); // Mochawesome plugin
+
   return config;
 }
 
 module.exports = defineConfig({
-  reporter: 'cypress-mochawesome-reporter',
+  reporter: "cypress-mochawesome-reporter",
   reporterOptions: {
-    reportDir: 'cypress/reports',
+    reportDir: "cypress/reports",
     charts: true,
-    reportPageTitle: 'cypress cucumber test report',
+    reportPageTitle: "Cypress Cucumber Test Report",
     embeddedScreenshots: true,
     inlineAssets: true,
     saveAllAttempts: false,
@@ -25,14 +29,10 @@ module.exports = defineConfig({
 
   e2e: {
     setupNodeEvents,
-    specPattern: "cypress/e2e/googleSearch.feature",
+    specPattern: "cypress/e2e/**/*.feature",
     baseUrl: "https://www.amazon.com.br",
+    supportFile: "cypress/support/e2e.js",
     experimentalModifyObstructiveThirdPartyCode: true,
     defaultCommandTimeout: 10000,
-  },
-  env: {
-    "cypress-cucumber-preprocessor": {
-      stepDefinitions: "cypress/support/step_definitions/*.{js,ts}"
-    }
   },
 });

@@ -12,7 +12,6 @@
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^20.0.0",
     "cypress": "^14.4.0",
-    "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-mochawesome-reporter": "^3.8.0"
   },
   "cypress-cucumber-preprocessor": {
