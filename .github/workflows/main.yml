@@ -1,6 +1,7 @@
 name: Run Cypress Tests with Mochawesome
 
 on:
+workflow_dispatch:
   push:
     branches: [main]
   pull_request:
