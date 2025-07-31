@@ -16,6 +16,8 @@ async function setupNodeEvents(on, config) {
 }
 
 module.exports = defineConfig({
+  viewportWidth: 1920,
+  viewportHeight: 1080,
   reporter: "cypress-mochawesome-reporter",
   reporterOptions: {
     reportDir: "cypress/reports",
