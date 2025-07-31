@@ -1,4 +1,4 @@
-name: Run Cypress Tests with Mochawesome
+name: Run Cypress Tests with Mochawesome Report
 
 on:
   push:
