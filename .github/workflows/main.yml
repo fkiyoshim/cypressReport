@@ -1,7 +1,7 @@
 name: Run Cypress Tests with Mochawesome
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # 🔹 Permite executar manualmente pelo botão "Run workflow"
   push:
     branches: [main]
   pull_request:
