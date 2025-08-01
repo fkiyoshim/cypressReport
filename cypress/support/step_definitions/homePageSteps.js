@@ -40,36 +40,7 @@ Given("eu acesso a homepage e seleciono o terceiro registro com o mesmo nome", (
   .click({force:true}); 
 */
 
-cy.get('#desktop-grid-1')
-  .then(($cards) => {
-    let maiorDesconto = 0;
-    let indexDoMaiorDesconto = -1;
 
-    Cypress._.each($cards, (card, index) => {
-      const descontoEl = card.querySelector('.a-size-mini');
-      const textoDesconto = descontoEl ? descontoEl.innerText : '';
-      const match = textoDesconto.match(/(\d+)%/);
-
-      if (match) {
-        const valor = parseInt(match[1], 10);
-        if (valor > maiorDesconto) {
-          maiorDesconto = valor;
-          indexDoMaiorDesconto = index; // salva o índice do card
-        }
-      }
-    });
-
-    if (indexDoMaiorDesconto >= 0) {
-      // Agora seleciona o card pelo índice e clica no link correto
-      cy.get('#desktop-grid-1')
-        .eq(indexDoMaiorDesconto)
-        .find('a.a-link-normal')
-        .first()
-        .click();
-    } else {
-      throw new Error('Nenhum item com desconto encontrado');
-    }
-  });
 
 })
 
@@ -83,26 +54,6 @@ Given("eu acesso a homepage e seleciono o produto o menor desconto na sessao Ofe
   .click({force:true}); 
 */
 
-  cy.get('[data-card-metrics-id="quad-multi-asin-card-v2_desktop-gateway-atf_0"]')
-    .then(($cards) => {
-      let menorDesconto = Infinity;
-      let cardComMenorDesconto;
-
-      $cards.each((_, card) => {
-        const textoDesconto = card.innerText;
-        const match = textoDesconto.match(/(\d+)%/);
-        if (match) {
-          const valor = parseInt(match[1], 10);
-          if (valor < menorDesconto) {
-            menorDesconto = valor;
-            cardComMenorDesconto = card;
-          }
-        }
-      });
-
-      if (cardComMenorDesconto) {
-        cy.wrap(cardComMenorDesconto).find('a').first().click();
-      }
-    });
+cy.get('#twotabsearchtextbox').should('be.visible').type("Amassador de alho")
 
 })
